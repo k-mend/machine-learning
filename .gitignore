@@ -1,0 +1,49 @@
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ML Models (large files)
+# *.pkl
+# *.h5
+# *.joblib
+# *.model
+# *.bin
+# models/*.pkl
+# models/*.json
+# models/*.ubj
+
+# Data files
+*.csv
+*.parquet
+*.feather
+data/
+*.db
+*.sqlite
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log

@@ -1,20 +1,16 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import pickle
+import joblib
 import numpy as np
 import pandas as pd
 
 # -------------------------
 # Load models and data
 # -------------------------
-with open("models/dict_vectorizer.pkl", "rb") as f:
-    dv = pickle.load(f)
-with open("models/rain_classifier.pkl", "rb") as f:
-    rain_clf = pickle.load(f)
-with open("models/rain_regressor.pkl", "rb") as f:
-    rain_reg = pickle.load(f)
-with open("models/ecocrop_df.pkl", "rb") as f:
-    ecocrop = pickle.load(f)
+dv = joblib.load("models/dict_vectorizer.bin")
+rain_clf = joblib.load("models/rain_classifier.bin")
+rain_reg = joblib.load("models/rain_regressor.bin")
+ecocrop = joblib.load("models/ecocrop_df.bin")
 
 features = list(dv.feature_names_)
 
@@ -46,10 +42,13 @@ def recommend_crops(site_temp, site_rain, tol=0.0):
     for _, row in ecocrop.iterrows():
         tmin, tmax = row.get('tmin', np.nan), row.get('tmax', np.nan)
         rmin, rmax = row.get('rmin', np.nan), row.get('rmax', np.nan)
-        if np.isnan([tmin, tmax, rmin, rmax]).any(): 
+
+        if np.isnan([tmin, tmax, rmin, rmax]).any():
             continue
+
         if tmin - tol <= site_temp <= tmax + tol and rmin - tol <= site_rain <= rmax + tol:
             candidates.append(row.get('scientificname', row.get('comname', None)))
+
     return list(filter(None, candidates))
 
 # -------------------------
