@@ -103,14 +103,14 @@ This section details how to deploy the container to AWS Lambda.
 2. Go to **ECR (Elastic Container Registry)**.
 3. Click **Create repository**.
 4. Name: `weather-model`.
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/ecr%20repository%20configuration%20name.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/ecr%20repository%20configuration%20name.png)
 6. Settings: Private, Mutable tags.
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/ecr%20repository%20configuration.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/ecr%20repository%20configuration.png)
 
 ### Step 2: Login and Build
 
 *Note: Replace `[ACCOUNT_ID]` and `[REGION]` with your specific details (e.g., `eu-west-1`).*
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/successful%20login%20to%20ecr%20server.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/successful%20login%20to%20ecr%20server.png)
 
 ```bash
 # 1. Authenticate Docker with AWS ECR
@@ -119,7 +119,7 @@ aws ecr get-login-password --region [REGION] | sudo docker login --username AWS 
 # 2. Build the image locally
 sudo docker build -t weather-model .
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/successful%20build%20of%20docker%20image%20locally.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/successful%20build%20of%20docker%20image%20locally.png)
 ### Step 3: Tag and Push
 
 
@@ -130,12 +130,12 @@ sudo docker tag weather-model:latest [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.co
 # 2. Push to AWS
 sudo docker push [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/weather-model:latest](https://.amazonaws.com/weather-model:latest)
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/pushing%20docker%20image%20to%20ecr.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/pushing%20docker%20image%20to%20ecr.png)
 
 
 ### Step 4: Create & Configure Lambda
 
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/create_lambda_function_from_scratch.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/create_lambda_function_from_scratch.png)
 
 1. Go to **AWS Lambda Console** -> **Create function**.
 2. Select **Container image**.
@@ -143,7 +143,7 @@ sudo docker push [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/weather-model:late
 4. **Configuration (Critical)**:
 * **Memory**: Set to `1024 MB`.
 * **Timeout**: Set to `30 seconds`. - you can add timeout to say 2 min incase the model is too large and takes time to load.
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/aws%20lamda%20general%20configuration.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/aws%20lamda%20general%20configuration.png)
 
 
 
@@ -161,16 +161,17 @@ This section details how to deploy the model as a continuous web service using F
 4. **Key Pair**: Create/Select a key pair (`.pem` file) and save it securely.
 5. **Network**: Allow SSH traffic (Anywhere) and HTTP/HTTPS traffic.
 
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/ec2_already%20created.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/ec2_already%20created.png)
 
 ### Step 2: Configure Security Group
 
 1. Click on the instance ID -> **Security** tab -> Click the **Security Group**.
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/change%20security%20groups.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/change%20security%20groups.png)
+
 3. **Edit inbound rules** -> **Add rule**.
 4. Type: `Custom TCP`, Port: `8000`, Source: `0.0.0.0/0` (Anywhere).
 5. Save rules.
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/edit%20inbounf%20rules.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/edit%20inbounf%20rules.png)
 
 ### Step 3: Connect to Server
 
@@ -178,7 +179,7 @@ This section details how to deploy the model as a continuous web service using F
 chmod 400 my-key-pair.pem
 ssh -i "my-key-pair.pem" ubuntu@[YOUR_EC2_PUBLIC_IP]
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/successful%20ssh%20on%20terminal.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/successful%20ssh%20on%20terminal.png)
 
 
 ### Step 4: Install Docker on EC2
@@ -207,7 +208,7 @@ sudo docker build -f Dockerfile.fastapi -t weather-fastapi .
 sudo docker tag weather-fastapi:latest [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/weather-model:fastapi](https://.amazonaws.com/weather-model:fastapi)
 sudo docker push [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/weather-model:fastapi](https://.amazonaws.com/weather-model:fastapi)
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/terminal%20pushing%20the%20ec2%20docker%20image.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/terminal%20pushing%20the%20ec2%20docker%20image.png)
 
 
 3. **Pull and Run on EC2**:
@@ -219,11 +220,10 @@ aws ecr get-login-password --region [REGION] | sudo docker login ...
 sudo docker run -d -p 8000:8000 [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/weather-model:fastapi](https://.amazonaws.com/weather-model:fastapi)
 
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/terminal%20pushing%20the%20ec2%20docker%20image.png?raw=true)
 
 
 **AWS EC2 Instance Running:**
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/proof%20aws%20ec2%20instance%20running%20(aws%20page).png?raw=true)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/proof%20aws%20ec2%20instance%20running%20(aws%20page).png)
 
 ---
 
@@ -241,7 +241,7 @@ sudo docker run -d -p 8000:8000 [ACCOUNT_ID].dkr.ecr.[REGION][.amazonaws.com/wea
 
 3. Click **Test**. You should see a JSON response with prediction probabilities.
 
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/proof%20of%20aws%20lamda%20deployment%20and%20response.png?raw=true)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/proof%20of%20aws%20lamda%20deployment%20and%20response.png)
 
 ### Local Testing (Optional)
 
@@ -254,7 +254,7 @@ python3
 >>> import lambda_function
 >>> lambda_function.predict("[https://some-image-url.jpg](https://some-image-url.jpg)")
 ```
-![alt text](https://github.com/k-mend/machine-learning/blob/main/Weather%20Project/screenshots/local%20docker%20image%20response%20before%20pushing%20to%20ecr.png)
+![alt text](https://github.com/k-mend/machine-learning/blob/main/Deep%20Learning%20Capstone%20Weather%20Project/screenshots/local%20docker%20image%20response%20before%20pushing%20to%20ecr.png)
 
 ---
 
