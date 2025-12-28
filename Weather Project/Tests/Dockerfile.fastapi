@@ -1,0 +1,8 @@
+FROM python:3.10-slim-bookworm
+RUN apt-get update && apt-get install -y python3-dev build-essential libpcre2-dev && rm -rf /var/lib/apt/lists/*
+RUN pip install fastapi uvicorn tensorflow-cpu keras-image-helper
+WORKDIR /app
+COPY main.py .
+COPY weather_model.tflite .
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
