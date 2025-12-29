@@ -37,7 +37,6 @@ By solving this, we enable applications to "see" the weather, providing a second
 ├── best_weather_model.keras        # Raw Tensorflow model before converting to tensorflow lite
 ├── Dataset                         # Final Cleaned dataset used to train models
 ├── Dockerfile                      # Instructions to build the Lambda container image
-├── Dockerfile.fastapi              # Instructions to build the Web Service (EC2) image
 ├── lambda_function.py              # The entry point for AWS Lambda
 |
 ├── Test                            # The Subfolder used to deploy to EC2 service
@@ -47,7 +46,7 @@ By solving this, we enable applications to "see" the weather, providing a second
 |--|--/weather_model.tflite         # The lighter tensorflow model deployed to EC2 service via FastAPI
 ├── Multi-class Weather Dataset     # Original Raw Unprocessed data
 ├── Multiclass_Weather_dataset.ipynb# The raw notebook used to train the model
-├── test.py                         # The python file used to test docker response locally
+├── test.py                         # The python file used to test docker response locally before deploying the docker image
 ├── weather_model.tflite            # The trained compressed final TFLite model
 └── README.md                       # Project documentation
 
