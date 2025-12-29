@@ -19,8 +19,8 @@ By solving this, we enable applications to "see" the weather, providing a second
 
 * **Model**: Xception (Pre-trained), converted to TensorFlow Lite (`weather_model.tflite`).
 * **Infrastructure**:
-    * **Option A**: AWS Lambda (Serverless Compute) + AWS ECR.
-    * **Option B**: AWS EC2 (Virtual Server) running FastAPI + Docker.
+    * **Option A**: **AWS Lambda** (Serverless Compute) + **AWS ECR**.
+    * **Option B**: **AWS EC2** (Virtual Server) running **FastAPI** + **Docker**.
 * **Container Base**: `python:3.10-slim-bookworm`.
 * **Key Libraries**: `tflite_runtime` (or `tensorflow-cpu`), `keras_image_helper`, `awslambdaric` (for Lambda), `fastapi`, `uvicorn`.
 
