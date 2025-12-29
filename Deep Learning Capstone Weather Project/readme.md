@@ -39,7 +39,12 @@ By solving this, we enable applications to "see" the weather, providing a second
 ├── Dockerfile                      # Instructions to build the Lambda container image
 ├── Dockerfile.fastapi              # Instructions to build the Web Service (EC2) image
 ├── lambda_function.py              # The entry point for AWS Lambda
-├── main.py                         # The entry point for FastAPI (EC2)
+|
+├── Test                            # The Subfolder used to deploy to EC2 service
+|--|--/main.py                      # The entry point for FastAPI (EC2)
+|--|--/Dockerfile.fastapi           # The Dockerfile Configuration for EC2 service deployment
+|--|--/fastapi_deployment.py        # used to load the model during testing
+|--|--/weather_model.tflite         # The lighter tensorflow model deployed to EC2 service via FastAPI
 ├── Multi-class Weather Dataset     # Original Raw Unprocessed data
 ├── Multiclass_Weather_dataset.ipynb# The raw notebook used to train the model
 ├── test.py                         # The python file used to test docker response locally
